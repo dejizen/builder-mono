@@ -1,4 +1,4 @@
-import Builder from "@repo/ui/builder";
+import Builder from "@repo/builder/builder";
 
 export default async function Home() {
   console.log(

@@ -20,9 +20,9 @@ importers:
 
   apps/docs:
     dependencies:
-      '@repo/ui':
+      '@repo/builder':
         specifier: workspace:*
-        version: link:../../packages/ui
+        version: link:../../packages/builder
       next:
         specifier: ^14.2.3
         version: 14.2.3(react-dom@18.2.0)(react@18.2.0)
@@ -72,9 +72,9 @@ importers:
       '@next/env':
         specifier: ^14.2.14
         version: 14.2.14
-      '@repo/ui':
+      '@repo/builder':
         specifier: workspace:*
-        version: link:../../packages/ui
+        version: link:../../packages/builder
       next:
         specifier: ^14.2.3
         version: 14.2.3(react-dom@18.2.0)(react@18.2.0)
@@ -119,27 +119,7 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
 
-  packages/config-eslint:
-    devDependencies:
-      '@vercel/style-guide':
-        specifier: ^5.2.0
-        version: 5.2.0(eslint@8.57.0)(prettier@3.2.5)(typescript@5.4.5)
-      eslint-config-turbo:
-        specifier: ^2.0.0
-        version: 2.0.0(eslint@8.57.0)
-
-  packages/config-tailwind:
-    devDependencies:
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../config-typescript
-      tailwindcss:
-        specifier: ^3.4.1
-        version: 3.4.1
-
-  packages/config-typescript: {}
-
-  packages/ui:
+  packages/builder:
     dependencies:
       react:
         specifier: ^18.2.0
@@ -168,7 +148,27 @@ importers:
         version: 3.4.1
       typescript:
         specifier: ^5.3.3
-        version: 5.3.3
+        version: 5.4.5
+
+  packages/config-eslint:
+    devDependencies:
+      '@vercel/style-guide':
+        specifier: ^5.2.0
+        version: 5.2.0(eslint@8.57.0)(prettier@3.2.5)(typescript@5.4.5)
+      eslint-config-turbo:
+        specifier: ^2.0.0
+        version: 2.0.0(eslint@8.57.0)
+
+  packages/config-tailwind:
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../config-typescript
+      tailwindcss:
+        specifier: ^3.4.1
+        version: 3.4.1
+
+  packages/config-typescript: {}
 
 packages:
 
