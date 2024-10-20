@@ -1,4 +1,4 @@
-import { DejiComponent } from "./builder";
+import { DejiComponent } from "./render";
 
 export const mapComponents = (
   datoCmsLayout: any[],
