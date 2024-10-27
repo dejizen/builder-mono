@@ -11,6 +11,7 @@
     "./styles.css": "./dist/index.css",
     "./builder": "./src/components/builder.tsx",
     "./render": "./src/components/render.tsx",
+    "./models": "./src/models/public.model.ts",
     "./ui/*": "./src/components/builderComps/**/*.tsx"
   },
   "license": "MIT",
