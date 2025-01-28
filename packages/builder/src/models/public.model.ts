@@ -1,3 +1,4 @@
 export enum CmsEnum {
-  DATO = "dato",
+  DATO = 'dato',
+  KONTENT = 'kontent',
 }

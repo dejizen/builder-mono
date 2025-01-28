@@ -1,40 +1,41 @@
-import { DejiComponent } from "../../components/render";
-import { CmsLayout } from "../../models/cms.model";
+/* eslint-disable */
+import { DejiComponent } from '../../components/render'
+import { CmsLayout } from '../../models/cms.model'
 
 export const mapComponents = async ({
   token,
   slug,
 }: CmsLayout): Promise<DejiComponent<any>[]> => {
   const resItemsType = await fetch(`https://site-api.datocms.com/item-types`, {
-    cache: "no-store",
+    cache: 'no-store',
     headers: {
       Authorization: `Bearer ${token}`,
-      Accept: "application/json",
-      "X-Api-Version": "3",
+      Accept: 'application/json',
+      'X-Api-Version': '3',
     },
-  });
-  const itemsType = await resItemsType.json();
+  })
+  const itemsType = await resItemsType.json()
 
   const resPage = await fetch(
     `https://site-api.datocms.com/items?filter[type]=page&filter[fields][slug][eq]=${slug}&nested=true`,
     {
-      cache: "no-store",
+      cache: 'no-store',
       headers: {
         Authorization: `Bearer ${token}`,
-        Accept: "application/json",
-        "X-Api-Version": "3",
+        Accept: 'application/json',
+        'X-Api-Version': '3',
       },
     }
-  );
-  const pages = await resPage.json();
-  const page = pages.data[0];
+  )
+  const pages = await resPage.json()
+  const page = pages.data[0]
 
   const datoCmsLayout = buildComponentsName(
     page.attributes.layout,
     itemsType.data
-  );
-  return buildComponents(datoCmsLayout);
-};
+  )
+  return buildComponents(datoCmsLayout)
+}
 
 const buildComponentsName = (
   datoCmsLayout: any[],
@@ -42,8 +43,8 @@ const buildComponentsName = (
 ): any[] => {
   return datoCmsLayout.map((item: any) => {
     const iTypeFound = datoCmsItemTypes.find((iType: any) => {
-      return iType.id === item.relationships.item_type.data.id;
-    });
+      return iType.id === item.relationships.item_type.data.id
+    })
     return !!iTypeFound
       ? item.attributes.childs && item.attributes.childs.length
         ? {
@@ -66,9 +67,9 @@ const buildComponentsName = (
               api_key: iTypeFound.attributes.api_key,
             },
           }
-      : item;
-  });
-};
+      : item
+  })
+}
 
 const buildComponents = (layout: any[]): DejiComponent<any>[] => {
   return layout.map((item: any) => {
@@ -90,6 +91,6 @@ const buildComponents = (layout: any[]): DejiComponent<any>[] => {
             item.attributes.api_key.slice(1)
           }`,
           props: { ...item.attributes },
-        });
-  });
-};
+        })
+  })
+}

@@ -1,25 +1,29 @@
-import { CmsEnum } from "../models/public.model";
-import { mapComponents } from "./mapper";
-import Render, { DejiBuilder } from "./render";
+import { CmsEnum } from '../models/public.model'
+import { mapComponents } from './mapper'
+import Render, { DejiBuilder } from './render'
 
 export interface BuilderData {
-  token: string;
-  slug: string;
-  customComponents: any;
-  cms: CmsEnum;
+  token: string
+  slug: string
+  env?: string
+  locale?: string
+  collection?: string
+  pageType?: string
+  customComponents: any
+  cms: CmsEnum
 }
 
 export default async function Builder(props: BuilderData) {
   if (!props.cms || !props.token || !props.slug) {
-    throw new Error("Missing required props");
+    throw new Error('Missing required props')
   }
 
-  const components = await mapComponents(props);
+  const components = await mapComponents(props)
 
   const dejiBuilder = new DejiBuilder<any>({
     components,
     customComponents: props.customComponents,
-  });
+  })
 
-  return <Render {...dejiBuilder} />;
+  return <Render {...dejiBuilder} />
 }
