@@ -1,7 +1,6 @@
 import * as dato from '../adapters/dato/dato'
 import * as kontent from '../adapters/kontent/kontent'
-import { CmsLayout } from '../models/cms.model'
-import { DejiComponent } from './render'
+import { CmsLayout, DejiComponent } from '../models/cms.model'
 
 export const mapComponents = async ({
   token,

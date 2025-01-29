@@ -13,3 +13,15 @@ export interface CmsLayout {
   cardtypeName?: string
   to?: any
 }
+
+export class DejiComponent<T> {
+  name: string
+  props?: T
+  // children?: DejiComponent<T>[];
+
+  constructor(data: DejiComponent<T>) {
+    this.name = data.name
+    this.props = data.props
+    // this.children = data.children;
+  }
+}

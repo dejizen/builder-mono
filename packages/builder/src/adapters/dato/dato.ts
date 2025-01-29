@@ -1,6 +1,5 @@
 /* eslint-disable */
-import { DejiComponent } from '../../components/render'
-import { CmsLayout } from '../../models/cms.model'
+import { CmsLayout, DejiComponent } from '../../models/cms.model'
 
 export const mapComponents = async ({
   token,

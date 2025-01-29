@@ -1,12 +1,12 @@
 import { ComponentType } from 'react'
-import { DejiComponent } from './render'
+import { DejiComponent } from '../models/cms.model'
 
 interface DynamicCompoProps {
   dejiComponent: DejiComponent<any>
   customComponents: any
 }
 
-export default function DynamicComp(props: DynamicCompoProps) {
+export function DynamicComp(props: DynamicCompoProps) {
   console.log(
     '🚀 ~ DynamicComp ~ props.dejiComponent.props:',
     props.dejiComponent.name
