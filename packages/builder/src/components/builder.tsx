@@ -3,26 +3,32 @@ import { mapComponents } from './mapper'
 import Render, { DejiBuilder } from './render'
 
 export interface BuilderData {
-  token: string
-  slug: string
-  env?: string
-  locale?: string
-  collection?: string
-  pageType?: string
-  customComponents: any
-  cms: CmsEnum
+  config: {
+    token: string
+    slug: string
+    env?: string
+    locale?: string
+    collection?: string
+    regId?: string
+    pageType?: string
+    cardtypeName?: string
+    id?: string
+    to?: any
+    customComponents: any
+    cms: CmsEnum
+  }
 }
 
-export default async function Builder(props: BuilderData) {
-  if (!props.cms || !props.token || !props.slug) {
+export default async function Builder({ config }: BuilderData) {
+  if (!config.cms || !config.token || !config.slug) {
     throw new Error('Missing required props')
   }
 
-  const components = await mapComponents(props)
+  const components = await mapComponents(config)
 
   const dejiBuilder = new DejiBuilder<any>({
     components,
-    customComponents: props.customComponents,
+    customComponents: config.customComponents,
   })
 
   return <Render {...dejiBuilder} />

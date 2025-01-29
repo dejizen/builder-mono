@@ -8,4 +8,8 @@ export interface CmsLayout {
   locale?: string
   collection?: string
   pageType?: string
+  regId?: string
+  id?: string
+  cardtypeName?: string
+  to?: any
 }

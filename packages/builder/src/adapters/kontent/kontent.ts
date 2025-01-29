@@ -9,7 +9,11 @@ export const mapComponents = async ({
   locale,
   pageType,
   collection,
+  regId,
   slug,
+  cardtypeName,
+  id,
+  to,
 }: CmsLayout): Promise<DejiComponent<any>[]> => {
   const kontentRestClient = createDeliveryClient({
     environmentId: env!,
@@ -24,22 +28,27 @@ export const mapComponents = async ({
     .collection(collection!)
     .equalsFilter('elements.slug', slug || 'home')
     .toPromise()
+  console.log('🚀 ~ pageType:', pageType, locale, collection)
 
   const page = resPage.data.items[0]
+  console.log('🚀 ~ page:', page)
 
-  const datoCmsLayout = buildComponentsName(page.elements)
-  return buildComponents(datoCmsLayout)
+  const kontentCmsLayout = buildComponentsName(
+    page.elements.content.linkedItems
+  )
+  return buildComponents(kontentCmsLayout, { regId, cardtypeName, to, id })
 }
 
-const buildComponentsName = (datoCmsLayout: any[]): any[] => {
-  return datoCmsLayout.map((item: any) => {
+const buildComponentsName = (kontentCmsLayout: any[]): any[] => {
+  return kontentCmsLayout.map((item: any) => {
+    console.log('🚀 ~ returnkontentCmsLayout.map ~ item:', item.system.type)
     return item.linkedItems && item.linkedItems.length
       ? {
           ...item,
           elements: {
             ...item.elements,
-            name: item.system.type.name,
-            api_key: item.system.type.codename,
+            name: item.system.name,
+            api_key: item.system.type,
             childs: buildComponentsName(item.linkedItems),
           },
         }
@@ -47,33 +56,43 @@ const buildComponentsName = (datoCmsLayout: any[]): any[] => {
           ...item,
           elements: {
             ...item.elements,
-            name: item.system.type.name,
-            api_key: item.system.type.codename,
+            name: item.system.name,
+            api_key: item.system.type,
           },
         }
   })
 }
 
-const buildComponents = (layout: any[]): DejiComponent<any>[] => {
+const buildComponents = (layout: any[], extra: any): DejiComponent<any>[] => {
   return layout.map((item: any) => {
-    //console.log("buildComponents item", item);
+    const name = item.elements.api_key
+      .split('_')
+      .map((n: string) => n.charAt(0).toUpperCase() + n.slice(1))
+      .join('')
+
     return item.elements.childs && item.elements.childs.length
       ? new DejiComponent<any>({
-          name: `${
-            item.elements.api_key.charAt(0).toUpperCase() +
-            item.elements.api_key.slice(1)
-          }`,
+          name: name,
           props: {
-            ...item.elements,
-            children: buildComponents(item.elements.childs),
+            elements: {
+              item: {
+                ...item.elements,
+              },
+            },
+            extra,
+            children: buildComponents(item.elements.childs, extra),
           },
         })
       : new DejiComponent<any>({
-          name: `${
-            item.elements.api_key.charAt(0).toUpperCase() +
-            item.elements.api_key.slice(1)
-          }`,
-          props: { ...item.elements },
+          name: name,
+          props: {
+            item: {
+              elements: {
+                ...item.elements,
+              },
+            },
+            extra,
+          },
         })
   })
 }

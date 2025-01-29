@@ -1,7 +1,7 @@
 {
-  "name": "@repo/eslint-config",
+  "name": "@dejizen/eslint-config",
   "version": "0.0.0",
-  "private": true,
+  "private": false,
   "devDependencies": {
     "@vercel/style-guide": "^5.2.0",
     "eslint-config-turbo": "^2.0.0"
