@@ -6,19 +6,21 @@ export interface BuilderData {
   config: {
     token: string
     slug: string
+    locale: string
     env?: string
-    locale?: string
     collection?: string
-    regId?: string
     pageType?: string
-    cardtypeName?: string
-    id?: string
-    to?: any
     customComponents: any
     cms: CmsEnum
+    extra: any
   }
 }
 
+// locale?: string
+// regId?: string
+// cardtypeName?: string
+// id?: string
+// to?: any
 export async function Builder({ config }: BuilderData) {
   if (!config.cms || !config.token || !config.slug) {
     throw new Error('Missing required props')

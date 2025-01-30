@@ -8,11 +8,8 @@ export const mapComponents = async ({
   locale,
   pageType,
   collection,
-  regId,
   slug,
-  cardtypeName,
-  id,
-  to,
+  extra,
 }: CmsLayout): Promise<DejiComponent<any>[]> => {
   const kontentRestClient = createDeliveryClient({
     environmentId: env!,
@@ -27,20 +24,17 @@ export const mapComponents = async ({
     .collection(collection!)
     .equalsFilter('elements.slug', slug || 'home')
     .toPromise()
-  console.log('🚀 ~ pageType:', pageType, locale, collection)
 
   const page = resPage.data.items[0]
-  console.log('🚀 ~ page:', page)
 
   const kontentCmsLayout = buildComponentsName(
     page.elements.content.linkedItems
   )
-  return buildComponents(kontentCmsLayout, { regId, cardtypeName, to, id })
+  return buildComponents(kontentCmsLayout, extra)
 }
 
 const buildComponentsName = (kontentCmsLayout: any[]): any[] => {
   return kontentCmsLayout.map((item: any) => {
-    console.log('🚀 ~ returnkontentCmsLayout.map ~ item:', item.system.type)
     return item.linkedItems && item.linkedItems.length
       ? {
           ...item,

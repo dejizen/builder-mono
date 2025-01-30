@@ -9,15 +9,12 @@ export const mapComponents = async ({
   env,
   locale,
   collection,
-  regId,
   pageType,
-  cardtypeName,
-  to,
-  id,
+  extra,
 }: CmsLayout): Promise<DejiComponent<any>[]> => {
   switch (cms) {
     case 'dato':
-      return await dato.mapComponents({ token, slug, cms })
+      return await dato.mapComponents({ token, slug, cms, extra, locale })
     case 'kontent':
       return await kontent.mapComponents({
         token,
@@ -26,11 +23,8 @@ export const mapComponents = async ({
         env,
         locale,
         collection,
-        regId,
         pageType,
-        cardtypeName,
-        to,
-        id,
+        extra,
       })
     default:
       throw new Error('No CMS found')

@@ -7,11 +7,7 @@ interface DynamicCompoProps {
 }
 
 export function DynamicComp(props: DynamicCompoProps) {
-  console.log(
-    '🚀 ~ DynamicComp ~ props.dejiComponent.props:',
-    props.dejiComponent.name
-  )
-
+  // TODO: USE ALSO DEFAULT COMPONENTS
   const DynamicComponent: ComponentType<any> = props.customComponents[
     props.dejiComponent.name
   ] ? (
