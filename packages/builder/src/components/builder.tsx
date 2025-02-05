@@ -11,6 +11,7 @@ export interface BuilderData {
     collection?: string
     pageType?: string
     customComponents: any
+    clientConf: any
     cms: CmsEnum
     extra: any
   }

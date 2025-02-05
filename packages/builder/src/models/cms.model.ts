@@ -2,13 +2,14 @@ import { CmsEnum } from './public.model'
 
 export interface CmsLayout {
   cms: CmsEnum
-  token: string
+  token?: string
   slug: string
   locale: string
   env?: string
   collection?: string
   pageType?: string
   extra: any
+  clientConf: any
 }
 
 export class DejiComponent<T> {

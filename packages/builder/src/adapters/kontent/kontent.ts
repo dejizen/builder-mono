@@ -3,18 +3,14 @@ import { createDeliveryClient } from '@kontent-ai/delivery-sdk'
 import { CmsLayout, DejiComponent } from '../../models/cms.model'
 
 export const mapComponents = async ({
-  token,
-  env,
   locale,
   pageType,
   collection,
   slug,
   extra,
+  clientConf,
 }: CmsLayout): Promise<DejiComponent<any>[]> => {
-  const kontentRestClient = createDeliveryClient({
-    environmentId: env!,
-    linkedItemsReferenceHandler: 'map',
-  })
+  const kontentRestClient = createDeliveryClient(clientConf)
 
   const resPage = await kontentRestClient
     .items<any>()
