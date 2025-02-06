@@ -1,4 +1,4 @@
-import { CmsEnum } from '../models/public.model'
+import type { CmsEnum } from '../models/public.model'
 import { mapComponents } from './mapper'
 import { DejiBuilder, Render } from './render'
 
@@ -24,7 +24,8 @@ export interface BuilderData {
 // id?: string
 // to?: any
 export async function Builder({ config }: BuilderData) {
-  if (!config.cms || !config.token || !config.slug) {
+  // TODO: move this to every mapper file
+  if (!config.token || !config.slug) {
     throw new Error('Missing required props')
   }
 

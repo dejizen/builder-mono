@@ -1,5 +1,5 @@
-import { DejiComponent } from '../models/cms.model'
-import { DynamicComp } from './dynamicComp'
+import type { DejiComponent } from '../models/cms.model'
+import { DynamicComp } from './dynamic-comp'
 
 export class DejiBuilder<T> {
   components: DejiComponent<T>[]

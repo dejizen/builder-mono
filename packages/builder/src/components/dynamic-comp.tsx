@@ -1,5 +1,5 @@
-import { ComponentType } from 'react'
-import { DejiComponent } from '../models/cms.model'
+import type { ComponentType } from 'react'
+import type { DejiComponent } from '../models/cms.model'
 
 interface DynamicCompoProps {
   dejiComponent: DejiComponent<any>
@@ -10,11 +10,9 @@ export function DynamicComp(props: DynamicCompoProps) {
   // TODO: USE ALSO DEFAULT COMPONENTS
   const DynamicComponent: ComponentType<any> = props.customComponents[
     props.dejiComponent.name
-  ] ? (
-    props.customComponents[props.dejiComponent.name]
-  ) : (
-    <></>
-  )
+  ]
+    ? props.customComponents[props.dejiComponent.name]
+    : ''
   // dynamic(
   //     () => import(`./builderComps/deji${props.dejiComponent.name}`, {})
   //   )

@@ -1,5 +1,5 @@
 export * from './components/builder'
-export * from './components/dynamicComp'
+export * from './components/dynamic-comp'
 export * from './components/mapper'
 export * from './components/render'
 export * from './models/cms.model'

@@ -1,5 +1,5 @@
-/* eslint-disable */
-import { CmsLayout, DejiComponent } from '../../models/cms.model'
+import type { CmsLayout } from '../../models/cms.model'
+import { DejiComponent } from '../../models/cms.model'
 
 export const mapComponents = async ({
   token,
@@ -44,8 +44,8 @@ const buildComponentsName = (
     const iTypeFound = datoCmsItemTypes.find((iType: any) => {
       return iType.id === item.relationships.item_type.data.id
     })
-    return !!iTypeFound
-      ? item.attributes.childs && item.attributes.childs.length
+    return iTypeFound
+      ? item.attributes.childs?.length
         ? {
             ...item,
             attributes: {
@@ -73,11 +73,11 @@ const buildComponentsName = (
 const buildComponents = (layout: any[]): DejiComponent<any>[] => {
   return layout.map((item: any) => {
     //console.log("buildComponents item", item);
-    return item.attributes.childs && item.attributes.childs.length
+    return item.attributes.childs?.length
       ? new DejiComponent<any>({
           name: `${
-            item.attributes.api_key.charAt(0).toUpperCase() +
-            item.attributes.api_key.slice(1)
+            (item.attributes.api_key as string).charAt(0).toUpperCase() +
+            (item.attributes.api_key as string).slice(1)
           }`,
           props: {
             ...item.attributes,
@@ -86,8 +86,8 @@ const buildComponents = (layout: any[]): DejiComponent<any>[] => {
         })
       : new DejiComponent<any>({
           name: `${
-            item.attributes.api_key.charAt(0).toUpperCase() +
-            item.attributes.api_key.slice(1)
+            (item.attributes.api_key as string).charAt(0).toUpperCase() +
+            (item.attributes.api_key as string).slice(1)
           }`,
           props: { ...item.attributes },
         })

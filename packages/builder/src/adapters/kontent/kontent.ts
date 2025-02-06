@@ -1,6 +1,6 @@
-/* eslint-disable */
 import { createDeliveryClient } from '@kontent-ai/delivery-sdk'
-import { CmsLayout, DejiComponent } from '../../models/cms.model'
+import type { KontentCmsLayout } from '../../models/cms.model'
+import { DejiComponent } from '../../models/cms.model'
 
 export const mapComponents = async ({
   locale,
@@ -10,15 +10,15 @@ export const mapComponents = async ({
   extra,
   clientConf,
   enablePreview,
-}: CmsLayout): Promise<DejiComponent<any>[]> => {
+}: KontentCmsLayout): Promise<DejiComponent<any>[]> => {
   const kontentRestClient = createDeliveryClient(clientConf)
 
   const resPage = await kontentRestClient
     .items<any>()
     .depthParameter(99)
-    .type(pageType!)
-    .languageParameter(locale!)
-    .collection(collection!)
+    .type(pageType)
+    .languageParameter(locale)
+    .collection(collection)
     .equalsFilter('elements.slug', slug || 'home')
     .toPromise()
 
@@ -32,7 +32,7 @@ export const mapComponents = async ({
 
 const buildComponentsName = (kontentCmsLayout: any[]): any[] => {
   return kontentCmsLayout.map((item: any) => {
-    return item.linkedItems && item.linkedItems.length
+    return item.linkedItems?.length
       ? {
           ...item,
           elements: {
@@ -60,14 +60,14 @@ const buildComponents = (
   enablePreview?: boolean
 ): DejiComponent<any>[] => {
   return layout.map((item: any) => {
-    const name = item.elements.api_key
+    const name = (item.elements.api_key as string)
       .split('_')
       .map((n: string) => n.charAt(0).toUpperCase() + n.slice(1))
       .join('')
 
-    return item.elements.childs && item.elements.childs.length
+    return item.elements.childs?.length
       ? new DejiComponent<any>({
-          name: name,
+          name,
           props: {
             elements: {
               item: {
@@ -89,7 +89,7 @@ const buildComponents = (
           },
         })
       : new DejiComponent<any>({
-          name: name,
+          name,
           props: {
             item: {
               elements: {

@@ -1,4 +1,4 @@
-import { DejiComponent } from '../../models/cms.model'
+import type { DejiComponent } from '../../models/cms.model'
 
 export class DejiCompBase {
   class?: string

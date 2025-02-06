@@ -1,15 +1,22 @@
-import { CmsEnum } from './public.model'
+import type { IDeliveryClientConfig } from '@kontent-ai/delivery-sdk'
+import type { CmsEnum } from './public.model'
+
+export interface KontentCmsLayout extends CmsLayout {
+  clientConf: IDeliveryClientConfig
+  env: string
+  collection: string
+  pageType: string
+}
+
+export interface DatoCmsLayout extends CmsLayout {
+  token?: string
+}
 
 export interface CmsLayout {
   cms: CmsEnum
-  token?: string
   slug: string
   locale: string
-  env?: string
-  collection?: string
-  pageType?: string
   extra: any
-  clientConf: any
   enablePreview?: boolean
 }
 
