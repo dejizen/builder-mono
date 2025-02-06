@@ -67,6 +67,9 @@ const buildComponents = (layout: any[], extra: any): DejiComponent<any>[] => {
               item: {
                 ...item.elements,
               },
+              system: {
+                ...item.system,
+              },
             },
             extra,
             children: buildComponents(item.elements.childs, extra),
@@ -78,6 +81,9 @@ const buildComponents = (layout: any[], extra: any): DejiComponent<any>[] => {
             item: {
               elements: {
                 ...item.elements,
+              },
+              system: {
+                ...item.system,
               },
             },
             extra,
