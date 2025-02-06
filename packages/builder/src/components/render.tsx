@@ -17,12 +17,11 @@ export function Render(props: DejiBuilder<any>) {
   return (
     <div className={`${props.isHorizontal ? 'flex gap-2' : 'flex flex-col'}`}>
       {props.components.map((comp, index) => (
-        <div className='mb-4 border-[1px] border-red-500 ml-2 p-1' key={index}>
-          <DynamicComp
-            dejiComponent={comp}
-            customComponents={props.customComponents}
-          />
-        </div>
+        <DynamicComp
+          key={index}
+          dejiComponent={comp}
+          customComponents={props.customComponents}
+        />
       ))}
     </div>
   )
