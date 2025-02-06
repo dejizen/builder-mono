@@ -9,6 +9,7 @@ export const mapComponents = async ({
   slug,
   extra,
   clientConf,
+  enablePreview,
 }: CmsLayout): Promise<DejiComponent<any>[]> => {
   const kontentRestClient = createDeliveryClient(clientConf)
 
@@ -26,7 +27,7 @@ export const mapComponents = async ({
   const kontentCmsLayout = buildComponentsName(
     page.elements.content.linkedItems
   )
-  return buildComponents(kontentCmsLayout, extra)
+  return buildComponents(kontentCmsLayout, extra, locale, enablePreview)
 }
 
 const buildComponentsName = (kontentCmsLayout: any[]): any[] => {
@@ -52,7 +53,12 @@ const buildComponentsName = (kontentCmsLayout: any[]): any[] => {
   })
 }
 
-const buildComponents = (layout: any[], extra: any): DejiComponent<any>[] => {
+const buildComponents = (
+  layout: any[],
+  extra: any,
+  locale: string,
+  enablePreview?: boolean
+): DejiComponent<any>[] => {
   return layout.map((item: any) => {
     const name = item.elements.api_key
       .split('_')
@@ -71,8 +77,15 @@ const buildComponents = (layout: any[], extra: any): DejiComponent<any>[] => {
                 ...item.system,
               },
             },
+            enablePreview,
+            locale,
             extra,
-            children: buildComponents(item.elements.childs, extra),
+            children: buildComponents(
+              item.elements.childs,
+              extra,
+              locale,
+              enablePreview
+            ),
           },
         })
       : new DejiComponent<any>({
@@ -86,6 +99,8 @@ const buildComponents = (layout: any[], extra: any): DejiComponent<any>[] => {
                 ...item.system,
               },
             },
+            enablePreview,
+            locale,
             extra,
           },
         })

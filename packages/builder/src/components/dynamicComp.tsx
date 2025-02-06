@@ -19,7 +19,21 @@ export function DynamicComp(props: DynamicCompoProps) {
   //     () => import(`./builderComps/deji${props.dejiComponent.name}`, {})
   //   )
 
-  return (
+  return props.dejiComponent.props.enablePreview ? (
+    <div
+      data-kontent-item-id={props.dejiComponent.props.item.system.id}
+      data-kontent-language-codename={
+        props.dejiComponent.props.locale || 'default'
+      }
+    >
+      <DynamicComponent
+        {...{
+          item: props.dejiComponent.props.item,
+          extra: props.dejiComponent.props.extra,
+        }}
+      />
+    </div>
+  ) : (
     <DynamicComponent
       {...{
         item: props.dejiComponent.props.item,

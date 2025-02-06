@@ -10,6 +10,7 @@ export interface CmsLayout {
   pageType?: string
   extra: any
   clientConf: any
+  enablePreview?: boolean
 }
 
 export class DejiComponent<T> {

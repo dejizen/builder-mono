@@ -14,6 +14,7 @@ export interface BuilderData {
     clientConf: any
     cms: CmsEnum
     extra: any
+    enablePreview?: boolean
   }
 }
 

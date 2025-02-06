@@ -6,7 +6,7 @@ export const mapComponents = async ({
   token,
   slug,
   cms,
-  env,
+  enablePreview,
   locale,
   collection,
   pageType,
@@ -32,6 +32,7 @@ export const mapComponents = async ({
         pageType,
         extra,
         clientConf,
+        enablePreview,
       })
     default:
       throw new Error('No CMS found')
