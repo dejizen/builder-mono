@@ -9,7 +9,7 @@ import { CmsEnum } from '../models/public.model'
 
 export const mapComponents = async (
   config: KontentCmsLayout | DatoCmsLayout
-): Promise<DejiComponent<any>[]> => {
+): Promise<{ page: any; components: DejiComponent<any>[] }> => {
   switch (config.cms) {
     case CmsEnum.DATO:
       return dato.mapComponents(config as DatoCmsLayout)

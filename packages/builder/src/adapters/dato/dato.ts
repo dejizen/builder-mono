@@ -4,7 +4,7 @@ import { DejiComponent } from '../../models/cms.model'
 export const mapComponents = async ({
   token,
   slug,
-}: CmsLayout): Promise<DejiComponent<any>[]> => {
+}: CmsLayout): Promise<{ page: any; components: DejiComponent<any>[] }> => {
   const resItemsType = await fetch(`https://site-api.datocms.com/item-types`, {
     cache: 'no-store',
     headers: {
@@ -33,7 +33,7 @@ export const mapComponents = async ({
     page.attributes.layout,
     itemsType.data
   )
-  return buildComponents(datoCmsLayout)
+  return { page, components: buildComponents(datoCmsLayout) }
 }
 
 const buildComponentsName = (

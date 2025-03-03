@@ -10,7 +10,10 @@ export const mapComponents = async ({
   extra,
   clientConf,
   enablePreview,
-}: KontentCmsLayout): Promise<DejiComponent<any>[]> => {
+}: KontentCmsLayout): Promise<{
+  page: any
+  components: DejiComponent<any>[]
+}> => {
   const kontentRestClient = createDeliveryClient(clientConf)
 
   const resPage = await kontentRestClient
@@ -27,7 +30,10 @@ export const mapComponents = async ({
   const kontentCmsLayout = buildComponentsName(
     page.elements.content.linkedItems
   )
-  return buildComponents(kontentCmsLayout, extra, locale, enablePreview)
+  return {
+    page,
+    components: buildComponents(kontentCmsLayout, extra, locale, enablePreview),
+  }
 }
 
 const buildComponentsName = (kontentCmsLayout: any[]): any[] => {

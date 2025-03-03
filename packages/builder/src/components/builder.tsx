@@ -1,3 +1,4 @@
+import type { DejiComponent } from '../models/cms.model'
 import type { CmsEnum } from '../models/public.model'
 import { mapComponents } from './mapper'
 import { DejiBuilder, Render } from './render'
@@ -16,6 +17,7 @@ export interface BuilderData {
     extra: any
     enablePreview?: boolean
   }
+  components?: DejiComponent<any>[]
 }
 
 // locale?: string
@@ -23,16 +25,18 @@ export interface BuilderData {
 // cardtypeName?: string
 // id?: string
 // to?: any
-export async function Builder({ config }: BuilderData) {
+export async function Builder({ config, components }: BuilderData) {
   // TODO: move this to every mapper file
   if (!config.token || !config.slug) {
     throw new Error('Missing required props')
   }
 
-  const components = await mapComponents(config)
+  const comps = components
+    ? components
+    : (await mapComponents(config)).components
 
   const dejiBuilder = new DejiBuilder<any>({
-    components,
+    components: comps,
     customComponents: config.customComponents,
   })
 
