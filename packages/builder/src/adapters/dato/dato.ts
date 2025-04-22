@@ -29,11 +29,16 @@ export const mapComponents = async ({
   const pages = await resPage.json()
   const page = pages.data[0]
 
+  return { page, components: build(page, itemsType) }
+}
+
+export const build = (page: any, itemsType: any) => {
   const datoCmsLayout = buildComponentsName(
     page.attributes.layout,
     itemsType.data
   )
-  return { page, components: buildComponents(datoCmsLayout) }
+
+  return buildComponents(datoCmsLayout)
 }
 
 const buildComponentsName = (
