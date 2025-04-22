@@ -27,13 +27,23 @@ export const mapComponents = async ({
 
   const page = resPage.data.items[0]
 
-  const kontentCmsLayout = buildComponentsName(
-    page.elements.content.linkedItems
-  )
   return {
     page,
-    components: buildComponents(kontentCmsLayout, extra, locale, enablePreview),
+    components: build(page, extra, locale, enablePreview),
   }
+}
+
+export const build = (
+  page: any,
+  extra: any,
+  locale: string,
+  enablePreview?: boolean
+) => {
+  const kontentCmsLayout = buildComponentsName(
+    page.elements.content.linkedItems as any[]
+  )
+
+  return buildComponents(kontentCmsLayout, extra, locale, enablePreview)
 }
 
 const buildComponentsName = (kontentCmsLayout: any[]): any[] => {
