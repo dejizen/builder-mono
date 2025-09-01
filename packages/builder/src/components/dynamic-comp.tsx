@@ -15,7 +15,7 @@ export function DynamicComp(props: DynamicCompoProps) {
     : null
 
   if (!DynamicComponent) {
-    console.log('component not found', props.dejiComponent.name)
+    console.warn('component not found', props.dejiComponent.name)
     return null
   }
 
@@ -43,11 +43,11 @@ export function DynamicComp(props: DynamicCompoProps) {
       />
     )
   } catch (e) {
-    console.log(
+    console.warn(
       'component not found',
       props.customComponents[props.dejiComponent.name]
     )
     console.error(e)
-    return <></>
+    return null
   }
 }

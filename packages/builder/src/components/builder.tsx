@@ -4,6 +4,7 @@ import { mapComponents } from './mapper'
 import { DejiBuilder, Render } from './render'
 
 export interface BuilderData {
+  className?: string
   config: {
     token: string
     slug: string
@@ -25,7 +26,7 @@ export interface BuilderData {
 // cardtypeName?: string
 // id?: string
 // to?: any
-export async function Builder({ config, components }: BuilderData) {
+export async function Builder({ config, components, className }: BuilderData) {
   // TODO: move this to every mapper file
   if (!config.token || !config.slug) {
     throw new Error('Missing required props')
@@ -40,5 +41,5 @@ export async function Builder({ config, components }: BuilderData) {
     customComponents: config.customComponents,
   })
 
-  return <Render {...dejiBuilder} />
+  return <Render className={className} {...dejiBuilder} />
 }

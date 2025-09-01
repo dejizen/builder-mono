@@ -5,6 +5,7 @@ export class DejiBuilder<T> {
   components: DejiComponent<T>[]
   customComponents: any[]
   isHorizontal?: boolean
+  className?: string
 
   constructor(data: DejiBuilder<T>) {
     this.components = data.components
@@ -15,7 +16,9 @@ export class DejiBuilder<T> {
 
 export function Render(props: DejiBuilder<any>) {
   return (
-    <div className={`${props.isHorizontal ? 'flex gap-2' : 'flex flex-col'}`}>
+    <div
+      className={`${props.isHorizontal ? 'flex gap-2' : 'flex flex-col'} ${props.className ? props.className : ''}`}
+    >
       {props.components.map((comp, index) => (
         <DynamicComp
           key={index}
